@@ -1,6 +1,7 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +12,9 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {% block head_js %}
-    {% endblock head_js %}
+    {% block head_js %} {% endblock head_js %}
 </head>
+
 <body>
     <!-- Fixed masthead -->
     <nav class="navbar navbar-masthead navbar-default navbar-fixed-top">
@@ -30,11 +31,11 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'profile' %}">Profile</a></li>
-                        <li><a href="{% url 'logout' %}">Log Out</a></li>
-                    {%  else %}
-                        <li><a href="{% url 'register' %}">Register</a></li>
-                        <li><a href="{% url 'login' %}">Log In</a></li>
+                    <li><a href="{% url 'profile' %}"><i class="fa fa-user"></i> Profile</a></li>
+                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                    {% else %}
+                    <li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i> Register</a></li>
+                    <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Log In</a></li>
                     {% endif %}
                     <li>
                         <a href="{% url 'view_cart' %}">
@@ -49,19 +50,17 @@
         </div>
     </nav>
     {% if messages %}
-        <div class="alert alert-success">
-            <div class="messages">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            </div>
+    <div class="alert alert-success">
+        <div class="messages">
+            {% for message in messages %} {{ message }} {% endfor %}
         </div>
+    </div>
     {% endif %}
     <div class="container">
         <div class="display">
             <form action="{% url 'search' %}" method="GET">
-                <input type="text" name="q"/>
-                <input type="submit" value="Search"/>
+                <input type="text" name="q" />
+                <input type="submit" value="Search" />
             </form>
         </div>
         {% block content %} {% endblock %}
@@ -72,4 +71,5 @@
         </div>
     </footer>
 </body>
+
 </html>
